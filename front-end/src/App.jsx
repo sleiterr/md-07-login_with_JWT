@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   Navigate,
   Route,
@@ -5,11 +6,13 @@ import {
   Routes,
 } from "react-router-dom";
 import Header from "./components/Header/Header";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+
+import Home from "./pages/Home/home";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profil/Profile";
 import Backoffice from "./pages/Backoffice/Backoffice";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
@@ -17,22 +20,29 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [token] = useLocalStorage("token", null);
+  const [token, setToken] = useLocalStorage("token", null);
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    if (savedToken) setToken(savedToken);
+  }, []);
+
+  const handleLogin = (newToken) => {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+  };
+
   return (
     <>
-      <Header />
+      <Header token={token} onLogout={handleLogout} />
       <Routes>
-        <Route
-          path="/"
-          element={
-            token ? (
-              <Navigate to="/profile" replace />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route
           path="/profile"
@@ -58,6 +68,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <ToastContainer position="top-center" autoClose={2500} />
     </>
