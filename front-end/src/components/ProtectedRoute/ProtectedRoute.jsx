@@ -3,7 +3,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import jwtDecode from "jwt-decode";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ childern, allowedRoles }) => {
+const ProtectedRoute = ({ children, allowedRoles }) => {
   const [token] = useLocalStorage("token", null);
 
   if (!token) return <Navigate to="/login" replace />;
@@ -18,7 +18,7 @@ const ProtectedRoute = ({ childern, allowedRoles }) => {
     return <Navigate to="/unauthorized" replace />;
   }
 
-  return childern;
+  return children;
 };
 
 export default ProtectedRoute;

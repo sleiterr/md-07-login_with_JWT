@@ -13,6 +13,9 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const [token] = useLocalStorage("token", null);
   return (
@@ -56,6 +59,7 @@ function App() {
           }
         />
       </Routes>
+      <ToastContainer position="top-center" autoClose={2500} />
     </>
   );
 }
