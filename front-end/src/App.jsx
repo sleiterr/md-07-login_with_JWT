@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Navigate,
   Route,
@@ -22,18 +22,11 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [token, setToken] = useLocalStorage("token", null);
 
-  useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    if (savedToken) setToken(savedToken);
-  }, []);
-
   const handleLogin = (newToken) => {
-    localStorage.setItem("token", newToken);
     setToken(newToken);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
     setToken(null);
   };
 

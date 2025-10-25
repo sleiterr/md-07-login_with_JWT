@@ -14,7 +14,11 @@ const Header = ({ token, onLogout }) => {
       <nav className="w-full flex items-center justify-center">
         <ul className="flex items-center justify-center">
           <li>
-            <Link to="/" className="font-normal text-zinc-800 text-xl">
+            <Link
+              to="/"
+              onClick={onLogout}
+              className="font-normal text-zinc-800 text-xl"
+            >
               Home
             </Link>
           </li>
@@ -28,21 +32,21 @@ const Header = ({ token, onLogout }) => {
                   Backoffice
                 </Link>
               </li>
-              <li className="cursor-pointer">
-                <Link to="/Login" className="font-normal text-zinc-800 text-xl">
-                  Login
-                </Link>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  to="/Logout"
+                  className="font-normal text-zinc-800 text-xl"
+                >
+                  Logout
+                </button>
               </li>
             </>
           ) : (
-            <li>
-              <button
-                onClick={handleLogout}
-                to="/Logout"
-                className="font-normal text-zinc-800 text-xl"
-              >
-                Logout
-              </button>
+            <li className="cursor-pointer">
+              <Link to="/Login" className="font-normal text-zinc-800 text-xl">
+                Login
+              </Link>
             </li>
           )}
         </ul>
