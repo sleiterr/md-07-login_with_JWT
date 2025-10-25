@@ -1,8 +1,18 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 const Header = ({ token, onLogout }) => {
   const navigate = useNavigate();
+
+  let user = null;
+  if (token) {
+    try {
+      user = jwtDecode(token);
+    } catch (err) {
+      console.error("invalid token:", err);
+    }
+  }
 
   const handleLogout = () => {
     onLogout();
@@ -51,6 +61,12 @@ const Header = ({ token, onLogout }) => {
           )}
         </ul>
       </nav>
+      {user && (
+        <div className="text-sm text-gray-700 mt-2">
+          Logged in as : <span className="font-semibold">{user.email}</span>(
+          {user.role})
+        </div>
+      )}
     </header>
   );
 };
