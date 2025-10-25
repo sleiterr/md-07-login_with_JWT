@@ -38,27 +38,34 @@ const Login = ({ onLogin }) => {
     }
   };
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="cursor-pointer">
-          Log ind
-        </button>
-      </form>
-    </>
+    <section className="h-screen flex items-center justify-center">
+      <div className="py-[8rem] mx-auto md:max-w-7xl">
+        <div className="bg-zinc-200 px-18 py-8 rounded-2xl">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col items-center justify-center"
+          >
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit" className="cursor-pointer">
+              Log ind
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 };
 
