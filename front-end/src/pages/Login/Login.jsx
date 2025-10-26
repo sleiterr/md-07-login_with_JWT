@@ -5,6 +5,7 @@ import { toast } from "react-toastify"; // Toast notifications
 import clsx from "clsx";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL; // Backend API base URL from environment variables
+console.log(API_URL);
 
 const Login = ({ onLogin }) => {
   // Local state for email and password inputs
@@ -18,6 +19,7 @@ const Login = ({ onLogin }) => {
 
     try {
       // Send login request to backend
+      console.log("API_URL:", API_URL);
       const res = await fetch(`${API_URL}/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
