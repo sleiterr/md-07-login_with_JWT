@@ -1,41 +1,48 @@
 import React, { useState } from "react";
-import jwtDecode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import jwtDecode from "jwt-decode"; // Library to decode JWT tokens
+import { useNavigate } from "react-router-dom"; // For programmatic navigation
+import { toast } from "react-toastify"; // Toast notifications
 import clsx from "clsx";
 
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+const API_URL = import.meta.env.VITE_API_BASE_URL; // Backend API base URL from environment variables
 
 const Login = ({ onLogin }) => {
+  // Local state for email and password inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook to navigate programmatically
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default page reload
 
     try {
+      // Send login request to backend
       const res = await fetch(`${API_URL}/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password }), // Send email and password as JSON
       });
 
-      const data = await res.json();
+      const data = await res.json(); // Parse JSON response
 
       if (res.ok) {
+        // If login successful
         toast.success("Login was successful");
-        onLogin(data.token);
+        onLogin(data.token); // Pass token to parent component (App.jsx) to store in localStorage
 
-        const user = jwtDecode(data.token);
+        const user = jwtDecode(data.token); // Decode JWT to get user info (id, email, role)
 
+        // Redirect user based on role
         if (user.role === "admin") navigate("/admin");
         else if (user.role === "editor") navigate("/backoffice");
         else navigate("/profile");
       } else {
+        // If login failed (wrong credentials)
         toast.error(data.message || "Invalid login");
       }
     } catch (err) {
+      // Catch network or unexpected errors
       console.error(err);
       toast.error("Something went wrong during login");
     }
