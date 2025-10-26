@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import clsx from "clsx";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -38,27 +39,53 @@ const Login = ({ onLogin }) => {
     }
   };
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="cursor-pointer">
-          Log ind
-        </button>
-      </form>
-    </>
+    <section className="h-screen flex items-center justify-center">
+      <div className="py-[8rem] mx-auto md:max-w-7xl">
+        <h2 className="font-bold text-5xl text-center text-zinc-800 mb-8">
+          Sign
+        </h2>
+        <div className="bg-zinc-200 px-18 py-8 rounded-xl">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col items-center justify-center gap-4"
+          >
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className={clsx(
+                "block w-xs rounded-lg border border-black/20 bg-white px-4 py-2 text-sm text-zink-400",
+                "focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-0",
+                "transition-all duration-300"
+              )}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className={clsx(
+                "block w-xs rounded-lg border border-black/20 bg-white px-4 py-2 text-sm text-zink-400",
+                "focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-0",
+                "transition-all duration-300"
+              )}
+            />
+            <button
+              type="submit"
+              className={clsx(
+                "rounded bg-sky-600 px-4 py-2 text-sm text-white",
+                "active:bg-sky-700 hover:bg-sky-500 cursor-pointer transition duration-300"
+              )}
+            >
+              Log ind
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 };
 

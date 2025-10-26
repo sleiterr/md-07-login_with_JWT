@@ -135,9 +135,7 @@ user@email.com        1234	        user	        Profile
 -----------------------------------------------------------------
 editor@email.com      1234	        editor	        Backoffice
 -----------------------------------------------------------------
-admin@email.com       1234	         admin	        AdminPanel,
-                                                    Backoffice, 
-                                                    Profile
+admin@email.com       1234	         admin	        AdminPanel, Backoffice,Profile
 _________________________________________________________________
 
 ## Usage
