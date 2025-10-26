@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import clsx from "clsx";
 
+const API_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +15,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3042/auth/signin", {
+      const res = await fetch(`${API_URL}/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
