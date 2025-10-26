@@ -8,7 +8,7 @@ import {
 import Header from "./components/Header/Header";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
-import Home from "./pages/Home/home";
+import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profil/Profile";
 import Backoffice from "./pages/Backoffice/Backoffice";
