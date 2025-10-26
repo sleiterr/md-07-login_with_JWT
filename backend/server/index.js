@@ -77,7 +77,7 @@ function authenticateToken(req, res) {
   const authHeader = req.headers.authorization;
 
   // Extract token from the header
-  const token = authHeader && authHeader.split(" ")[1];
+  const token = authHeader && authHeader.split("No token")[1];
   // If no token provided → respond with 401 Unauthorized
   if (!token) return res.status(401).json({ message: "" });
 
