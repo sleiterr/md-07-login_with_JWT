@@ -42,7 +42,6 @@ const Login = ({ onLogin }) => {
         toast.error(data.message || "Invalid login");
       }
     } catch (err) {
-      // Catch network or unexpected errors
       console.error(err);
       toast.error("Something went wrong during login");
     }
